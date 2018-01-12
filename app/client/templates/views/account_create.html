@@ -1,33 +1,36 @@
 <template name="views_account_create">
         <!-- we use a form, which posts into the "dapp-form-helper-iframe" iframe, so that the browser stores inout fields for native autocpmplete -->
-    <form class="container new-account" action="about:blank" target="dapp-form-helper-iframe" autocomplete="on">
+    <form class="container new-account n-new-account" action="about:blank" target="dapp-form-helper-iframe" autocomplete="on">
             
         <h1>{{{i18n 'wallet.newWallet.title'}}}</h1>
 
-        <input type="text" name="accountName" value="{{name}}" placeholder="{{i18n 'wallet.newWallet.accountName'}}" autofocus="true">
+        <input type="text" class="n-input-style" name="accountName" value="{{name}}" placeholder="{{i18n 'wallet.newWallet.accountName'}}" autofocus="true">
 
-        <h2>{{i18n 'wallet.newWallet.selectOwner'}}</h2>
+        <h2 class="title-h2">{{i18n 'wallet.newWallet.selectOwner'}}</h2>
+        <div class="sel-box">
+            {{> dapp_selectAccount accounts=ownerAccounts value=defaultOwner}}
+        </div>
 
-        {{> dapp_selectAccount accounts=ownerAccounts value=defaultOwner}}
 
 
-        <h2>{{i18n 'wallet.newWallet.accountType.title'}}</h2>
+
+        <h2 class="title-h2">{{i18n 'wallet.newWallet.accountType.title'}}</h2>
         
         <div class="row clear">
-            <label>
+            <label class="rdo-label">
                 <input type="radio" name="accountType" value="simple" {{simpleCheck}}>
                 <h3>{{i18n 'wallet.newWallet.accountType.simple.title'}}</h3>
                 <span>{{i18n 'wallet.newWallet.accountType.simple.description'}}</span>
             </label>
             {{#if showSection "simple"}}
                 <div class="indented-box">
-                   <br><span>{{i18n 'wallet.newWallet.accountType.simple.warning'}}</span>
+                   <br><span class="tip-span">{{i18n 'wallet.newWallet.accountType.simple.warning'}}</span>
                 </div>
             {{/if}}
         </div>
 
         <div class="row clear">
-            <label>
+            <label class="rdo-label">
                 <input type="radio" name="accountType" value="multisig" {{multisigCheck}}>
                 <h3>{{i18n 'wallet.newWallet.accountType.multisig.title'}}</h3>
                 {{#unless showSection "multisig"}}
@@ -51,7 +54,7 @@
         </div>
 
         <div class="row clear">
-            <label>
+            <label class="rdo-label">
                 <input type="radio" name="accountType" value="import">
                 <h3>{{i18n 'wallet.newWallet.accountType.import.title'}}</h3>
                 <span>{{i18n 'wallet.newWallet.accountType.import.description'}}</span>
@@ -64,9 +67,6 @@
                 </div>
             {{/if}}
         </div>
-
-        <hr>
-
         <!-- button type="submit" will send the form -->
         <button type="submit" class="dapp-block-button">{{i18n 'buttons.create'}}</button>
 

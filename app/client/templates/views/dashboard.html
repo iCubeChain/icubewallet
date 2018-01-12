@@ -8,7 +8,7 @@
         <h1>{{{i18n "wallet.accounts.title"}}}</h1>
 
         {{#if pendingConfirmations}}
-            <h2>{{i18n 'wallet.transactions.pendingConfirmations'}}</h2>
+            <h2 class="title-h2">{{i18n 'wallet.transactions.pendingConfirmations'}}</h2>
 
             {{> elements_transactions_table collection="PendingConfirmations" ids=pendingConfirmations }}
 
@@ -16,29 +16,26 @@
 
         {{#if hasAccounts}}
 
-            <h2>{{i18n "wallet.accounts.accountsTitle"}}</h2>
+            <h2 class="title-h2">{{i18n "wallet.accounts.accountsTitle"}}</h2>
             <p>
                 {{i18n "wallet.accounts.accountsDescription"}}
             </p>
             <div class="dapp-clear-fix"></div>
-
-            <div class="wallet-box-list">
+            <div class="wallet-box-list n-wallet-box-list">
                 {{#each accounts}}
                     {{> elements_account account=_id}}
                 {{/each}}
             </div>
 
             {{#if isMist}}
-                <button class="wallet-box create account">
-                    <div class="account-pattern">
-                        +
-                    </div>
-                    <h3>{{i18n "wallet.app.buttons.addAccount"}}</h3>
+                <button class="wallet-box create account n-account-btn">
+                    {{i18n "wallet.app.buttons.addAccount"}}
                 </button>
             {{/if}}
 
+            <hr>
 
-            <h2>{{i18n "wallet.accounts.walletsTitle"}}</h2>
+            <h2 class="title-h2">{{i18n "wallet.accounts.walletsTitle"}}</h2>
 
             {{#if hasMinimumBalance}}
                 <p>
@@ -52,18 +49,15 @@
 
 
 
-            <div class="wallet-box-list">
+            <div class="wallet-box-list n-new-wallet-box">
             {{#each wallets}}
                 {{> elements_account account=_id wallets=true}}
             {{/each}}
             </div>
 
             {{#if hasMinimumBalance}}
-                <a href="{{pathFor route='createAccount'}}" class="wallet-box create">
-                    <div class="account-pattern">
-                        +
-                    </div>
-                    <h3>{{i18n "wallet.app.buttons.addWallet"}}</h3>
+                <a href="{{pathFor route='createAccount'}}" class="wallet-box create n-account-btn">
+                    {{i18n "wallet.app.buttons.addWallet"}}
                 </a>
             {{/if}}
 
@@ -71,11 +65,8 @@
             <div class="col col-5 mobile-full ">
                 <br>
                 {{#if isMist}}
-                    <button class="wallet-box create account">
-                        <div class="account-pattern">
-                            +
-                        </div>
-                        <h3>{{i18n "wallet.app.buttons.addAccount"}}</h3>
+                    <button class="wallet-box create account n-account-btn">
+                        {{i18n "wallet.app.buttons.addAccount"}}
                     </button>
                 {{/if}}
             </div>
@@ -86,16 +77,16 @@
         {{/if}}
 
         <div class="dapp-clear-fix"></div>
-
+        <hr>
 
         {{#if allTransactions}}
-            <h2>{{i18n 'wallet.transactions.latest'}}</h2>
+            <h2 class="title-h2">{{i18n 'wallet.transactions.latest'}}</h2>
 
             {{> elements_transactions_table limit=5}}
 
         {{else}}
 
-            <h2>{{i18n 'wallet.transactions.none'}}</h2>
+            <h2 class="title-h2">{{i18n 'wallet.transactions.none'}}</h2>
         {{/if}}
     </div>
 </template>

@@ -1,16 +1,14 @@
 <template name="views_contracts">
-    <div class="dapp-container">
+    <div class="dapp-container contracts-box">
 
         <h1>{{i18n "wallet.contracts.contractTitle"}}</h1>
 
         <a href="{{pathFor route='deployContract'}}" class="wallet-box create">
-            <div class="account-pattern">
-                +
-            </div>
-            <h3>{{i18n "wallet.contracts.deployNewContract"}}</h3>
-        </a>  
-
-        <h2>{{i18n "wallet.contracts.customContracts"}}</h2>
+            <i>+</i>{{i18n "wallet.contracts.deployNewContract"}}
+        </a>
+        <br>
+        <hr>
+        <h2 class="title-h2">{{i18n "wallet.contracts.customContracts"}}</h2>
 
         <p>{{i18n "wallet.contracts.description" }}</p>
         <div class="dapp-clear-fix"></div>
@@ -22,17 +20,12 @@
         </div>
 
         <button class="wallet-box create add-contract">
-            <div class="account-pattern">
-                +
-            </div>
-            <h3>{{i18n "wallet.contracts.addCustomContract"}}</h3>
-        </button>  
+            <i>+</i>{{i18n "wallet.contracts.addCustomContract"}}
+        </button>
         <div class="dapp-clear-fix"></div>
+        <hr>
 
-
-        <br><br>
-
-        <h2>{{{i18n "wallet.tokens.title"}}}</h2>
+        <h2 class="title-h2">{{{i18n "wallet.tokens.title"}}}</h2>
 
         <p>
             {{{i18n "wallet.tokens.description"}}}
@@ -47,11 +40,8 @@
         </div>
 
         <button class="wallet-box create add-token">
-            <div class="account-pattern">
-                +
-            </div>
-            <h3>{{i18n "wallet.app.buttons.addToken"}}</h3>
-        </button>    
+            <i>+</i>{{i18n "wallet.app.buttons.addToken"}}
+        </button>
 
     </div>
 </template>

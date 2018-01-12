@@ -14,6 +14,10 @@
 // Change Default constants
 
 @colorLink: #02A8F3;
+@colorWhite:#fff;
+@colorH2:#ff12af;
+@colorText:#da54ac;
+@colorP:#890692;
 
 @heightHeader: @gridWidth * 2.5;
 
@@ -23,7 +27,7 @@
 @colorOSBackgroundFocus: #d9d0d0;
 @colorOSBackgroundBlur: lighten(@colorOSBackgroundFocus, 10%);
 
-@colorWinBackgroundFocus: #F0F0F0;
+@colorWinBackgroundFocus: rgba(0, 0, 0, 0.4);
 @colorWinBackgroundBlur: #F0F0F0;
 
 @colorLinuxBackgroundFocus: #403F3A;
@@ -57,35 +61,81 @@
         max-width: none; 
 
         > h2 {
-            margin-bottom: @gridHeight * 1;
+            //margin-bottom: @gridHeight * 1;
+            margin-bottom: 0;
         }
 
         > h2 + p {
-            margin-bottom: @gridHeight * 2;
-        } 
+            margin-bottom: @gridHeight * 1;
+            color: @colorText;
+        }
+        //新增样式修改--自定义修改
+        .n-wallet-box-list{
+            .wallet-box{
+                background-color: rgba(255, 255, 255, 0.5);
+                box-shadow: 0 2px 17px 0 rgba(68, 9, 71, 0.28);
+                border-radius: 4px;
+                height: 120px;
+                box-sizing: border-box;
+                padding-top:25px;
+                .dapp-identicon{
+                    top:40px;
+                }
+                .not-ens-name{
+                    color: #fff;
+                    font-style: normal;
+                    font-weight: normal;
+                    .icon-key{
+                        display: none;
+                    }
+                }
+                &>span{
+                    color: @colorP;
+                }
+
+            }
+        }
+        //新增新账户
+        button.n-account-btn,a.n-account-btn{
+            width: 270px;
+            min-height: 50px;
+            background-color: rgba(248, 89, 89, 0.71);
+            box-shadow: 0 1px 6px 0 rgba(230, 110, 118, 0.2);
+            border-radius: 4px;
+            color:#fff;
+            padding:0;
+            text-align: center;
+            position: static;
+            display: block;
+            margin-top:20px;
+        }
+      a.n-account-btn{
+        line-height: 50px;
+      }
     }   
 }
 
 
 body {
-    background: @colorWinBackgroundFocus;
+    background-image: linear-gradient(0deg,#610c62 0%,#250629 100%),
+    linear-gradient(#610c62,#610c62);
 
     &.app-blur {
-        background: @colorWinBackgroundBlur;
+        background: linear-gradient(0deg,#610c62 0%,#250629 100%),
+        linear-gradient(#610c62,#610c62);
     }
 }
 .app-blur {
     .dapp-header {
-        background: @colorWinBackgroundBlur;
+        background: @colorWinBackgroundFocus;
     }
 }
 
 // WINDOWS
 .win32 {
     .dapp-header {
-        background-color: @colorWinBackgroundFocus;
-        background-image: none;
-
+        background: @colorWinBackgroundFocus;
+        //background-image: none;
         &.dapp-small {
             .box-shadow(none);
             .dapp-shadow-small;
@@ -155,9 +205,9 @@ body {
 .dapp-header {
     padding-right: @gridWidth * 2.5;
     padding-left: @gridWidth * 2.5;
-    background-color: @colorWinBackgroundFocus;
+    background: @colorWinBackgroundFocus;
     -webkit-app-region: drag; // necessary to drag the wallet window
-    .background-image(linear-gradient(to bottom,  @colorWinBackgroundFocus 50%, #ddd9d9 90%));
+    //.background-image(linear-gradient(to bottom,  @colorWinBackgroundFocus 50%, #ddd9d9 90%));
 
     &.dapp-small {
         z-index: 30;
@@ -195,12 +245,13 @@ body {
     }
 
     nav ul a.active {
-        color: @colorTextSecondary;
+        color: #fff;
     }
 
     .block-info {
         padding-bottom: @defaultPaddingVertical;        
-        color: lighten(@colorGrayDark, 5%);
+        //color: lighten(@colorGrayDark, 5%);
+        color: @colorWhite;
         text-align: center;
         flex: 1 0;
 
@@ -256,7 +307,6 @@ body {
 .dapp-header.dapp-small + .dapp-flex-content > .dapp-content {
     padding-top: @gridHeight * 6 - 3px;
 }
-
 
 .account-balance {
     span {
@@ -389,6 +439,10 @@ body {
             float: right;
         }
     }
+    //账户信息详情新增样式
+    //.n-dapp-actionbar{
+    //    background: transparent;
+    //}
 
     .accounts-transactions {
         .watch-events-spinner .spinner-container {
@@ -405,6 +459,68 @@ body {
     .accounts-transactions,
     .execute-contract {
         flex: 1 100%;
+        &.n-execute-contract{
+            button{
+                background-color: #910095;
+                border-radius: 4px;
+            }
+            h2{
+                background: transparent;
+            }
+            table{
+                &.n-contract-constants{
+                    border-radius: 8px;
+                    overflow: hidden;
+                    tbody{
+                        tr{
+                            border-radius: 0;
+                            &:nth-child(even){
+                                background-color: rgba(255, 255, 255, 0.7);
+                                border-bottom: 0;
+                                td{
+                                    h3{
+                                        color: #666;
+                                    }
+                                }
+                            }
+                            &:nth-child(odd){
+                                background-color: rgba(255, 255, 255, 0.8);
+                                td{
+                                    h3{
+                                        color: #890692;
+                                    }
+                                }
+                            }
+                            td{
+                                border-radius: 0;
+                                input{
+                                    background-color: rgba(255, 255, 255, 0.5);
+                                    border-radius: 2px;
+                                    border: solid 1px rgba(255, 255, 255, 0.5);
+                                    border:0;
+                                }
+                                dd{
+                                    border-bottom: 0;
+                                }
+                                h4{
+                                    color: #666;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .n-contract-functions{
+                h4{
+                    color: #fff;
+                    margin-top:0;
+                }
+                select{
+                    background-color: rgba(255, 255, 255, 0.7);
+                    color:#910095;
+                }
+            }
+        }
     }
     
     > .dapp-identicon {
@@ -489,7 +605,6 @@ body {
 }
 
 .account-send-form {
-
     p.over-daily {
         .orange;
         font-weight: 400;
@@ -650,6 +765,89 @@ body {
     textarea {
         width: 100%;
     }
+    //新增send页面样式
+    &.n-account-send-form{
+        &>h1{
+            color:@colorWhite;
+            font-size:1.5em;
+        }
+        .n-form-wrapper{
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 8px 0 rgba(196, 196, 196, 0.38);
+            border-radius: 4px;
+            box-sizing: border-box;
+            padding:30px 50px;
+            h3{
+                color: #4d4d4d;
+                font-weight: normal;
+            }
+            .from-to{
+                .send-from{
+                    background-color: #f3f3f3;
+                    border-radius: 2px;
+                    select{
+                        width: 100%;
+                    }
+                }
+                .dapp-address-input{
+                    input{
+                        background-color: #f3f3f3;
+                        border-radius: 2px;
+                        border: none;
+                    }
+                }
+            }
+            .amount{
+                input{
+                    background-color: #f3f3f3;
+                    border-radius: 2px;
+                    color: #910095;
+                    border:none;
+                }
+                .n-show-pwd{
+                    margin-top: 10px;
+                    label{
+                        display: flex;
+                        align-items: center;
+                        input{
+                            display: none;
+                        }
+                        i{
+                            width: 19px;
+                            height: 19px;
+                            background-color: #f3f3f3;
+                            border-radius: 2px;
+                            border: solid 1px #cccccc;
+                            box-sizing: border-box;
+                            margin-right: 10px;
+                        }
+                        input[type=checkbox]:checked+i{
+                            background: #ea4d92 ;
+                            border-width: 4px;
+                            border-color: @colorWhite;
+                        }
+                    }
+                }
+                .send-info{
+                    span{
+                        color:#910095;
+                    }
+                }
+            }
+            .compile-contract{
+                .n-show-more{
+                    background: #910095;
+                    border-radius:4px;
+                }
+            }
+
+        }
+        .n-dapp-block-button{
+            background: #910095;
+            border-radius: 4px;
+            border:none;
+        }
+    }
 }
 
 .transaction-info,
@@ -749,6 +947,87 @@ body {
             color: @colorError;
         }
     }
+  //新增钱包合约自定义样式
+  &.n-new-account{
+    color: #fff;
+    h1{
+      font-size:1.5em;
+      color: #fff;
+    }
+    input.n-input-style{
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      border: solid 1px #fff;
+      height: 40px;
+      line-height: 40px;
+      box-sizing: border-box;
+    }
+    h2.title-h2{
+      background: none;
+      color: #ff12af;
+    }
+    .sel-box{
+      select{
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+        border: solid 1px #fff;
+        color: #fff;
+        padding-right: 20px;
+        option{
+          background-color: rgba(255, 255, 255, 0.3);
+        }
+      }
+      span.dapp-identicon {
+        width: floor(@gridWidth / 1.8);
+        height: floor(@gridWidth / 1.8);
+        left: @gridWidth * 0.5;
+        top:10px;
+      }
+    }
+    .rdo-label{
+      h3,span{
+        color: #fff;
+      }
+      input[type=radio]:after{
+        background-color: #910095;
+        border-color: rgba(255,255,255,.3);
+        color: #fff;
+      }
+    }
+    .indented-box{
+      .tip-span{
+        color: #910095;
+      }
+      button,input{
+        border-bottom: 1px #fff solid;
+        color: #ff12af;
+      }
+      .dapp-address-input{
+        input{
+          background-color: rgba(255, 255, 255, 0.3);
+          border-radius: 2px;
+          border: solid 1px #fff;
+        }
+        input:disabled{
+          border: solid 1px #fff;
+          color: #fff;
+          opacity: .8;
+        }
+        span.dapp-identicon {
+          width: floor(@gridWidth / 1.8);
+          height: floor(@gridWidth / 1.8);
+          left: @gridWidth * 0.5;
+          top:10px;
+        }
+      }
+    }
+    button.dapp-block-button{
+      background-color: #910095;
+      border-radius: 4px;
+      margin-top: 40px;
+      border-bottom:none;
+    }
+  }
 }
 
 
@@ -853,6 +1132,189 @@ body {
 .dapp-punctuation {
     opacity: 0.25;
 }
+body{
+    &.iCube-body{
+        .dapp-header{
+            nav{
+                ul{
+                    li{
+                        a{
+                            color: @colorWhite;
+                            height: 53px;
+                            line-height: 51px;
+                            box-sizing: border-box;
+                            padding:0 32px;
+                            //i{
+                            //    display: none;
+                            //}
+                            &.active,&:active{
+                                background: #400947;
+                                border-bottom: 2px #ea4d92 solid;
+                            }
+                            &:hover{
+                                color:#ff5ea5;
+                            }
+                        }
+                        &.wallet-balance{
+                            display: flex;
+                            align-items: center;
+                            h3{
+                                color: @colorWhite;
+                                margin:0 20px 0 0;
+
+                            }
+                            .account-balance{
+                                color:@colorWhite;
+                            }
+                        }
+                        .mrg-r{
+                            margin-right: 30px;
+                        }
+                    }
+                }
+            }
+        }
+        .dapp-flex-content{
+            background: transparent;
+            //新增合约样式
+            .dapp-modal-overlay{
+                .addCustom-box{
+                    h1,h3{
+                        color: #910095;
+                    }
+                    input{
+                        background-color: rgba(255, 255, 255, 0.6);
+                        border-radius: 4px;
+                        border: solid 1px rgba(255, 255, 255, 0.6);
+                    }
+                    textarea{
+                        background-color: rgba(255, 255, 255, 0.6);
+                        box-shadow: 0 4px 9px 0 rgba(241, 241, 241, 0.6);
+                        border-radius: 4px;
+                        border: solid 1px rgba(255, 255, 255, 0.6);
+                    }
+                    .dapp-modal-buttons{
+                        button{
+                            color: #910095;
+                        }
+                    }
+                }
+            }
+        }
+        .dapp-content{
+            .dapp-container{
+                &>h1{
+                    font-size: 1.5em;
+                    color: @colorWhite;
+                }
+                h2.title-h2{
+                    color: @colorH2;
+                    background: none;
+                }
+                &.contracts-box{
+                    .wallet-box{
+                        &.create{
+                            width:270px;
+                            min-height: 40px;
+                            line-height: 40px;
+                            color: #fff;
+                            text-align: center;
+                            background-color: rgba(145, 0, 149, 0.71);
+                            box-shadow: 0 1px 5px 0 rgba(230, 110, 118, 0.47);
+                            border-radius: 4px;
+                            box-sizing: border-box;
+                            padding:0;
+                            position: static;
+                            display: block;
+                            i{
+                                font-weight: bold;
+                                font-size:18px;
+                                margin-right: 5px;
+                            }
+                        }
+                    }
+                }
+                &.n-dapp-account{
+                    margin-top:60px;
+                    .n-accounts-page-summary{
+                        background-color: rgba(255, 255, 255, 0.5);
+                        box-shadow: 0 1px 6px 0 rgba(68, 9, 71, 0.28);
+                        border-radius: 4px;
+                        padding:30px 40px;
+                        .edit-name{
+                            font-style: normal;
+                            color: #47024c;
+                        }
+                        h2.copyable-address,span.account-balance{
+                            color:#890692;
+                        }
+                        .account-info{
+                            h3{
+                                color: #170419;
+                            }
+                            p{
+                                color: #360839;
+                            }
+                        }
+                    }
+                    .dapp-actionbar{
+                        background: transparent;
+                        nav{
+                            ul{
+                                li{
+                                    margin: 0 0 32px 0;
+                                    a,button{
+                                        color: #fff;
+                                    }
+                                  a{
+                                    span{
+                                      display: block;
+                                      margin-top: 5px;
+                                    }
+                                  }
+                                }
+                            }
+                        }
+                    }
+                    .n-wallet-info{
+                        background-color: rgba(255, 255, 255, 0.2);
+                        h3{
+                            color: #600c61;
+                        }
+                    }
+                }
+            }
+        }
+        .dapp-container{
+            .n-new-wallet-box{
+                a{
+                    background-color: rgba(255, 255, 255, 0.5);
+                    box-shadow: 0 2px 6px 0 rgba(68, 9, 71, 0.28);
+                    border-radius: 4px;
+                    h3.not-ens-name{
+                        color:#890692;
+                        font-style: normal;
+                    }
+                    .account-balance,.account-id{
+                        color: #890692;
+                        opacity: .9;
+                    }
+                }
+            }
+            .dapp-progress {
+                .dapp-bar {
+                    .background-image(linear-gradient(to bottom, @colorWhite 0%, fadeout(@colorWhite, 100%) 100%));
+                    box-shadow: 0 1px 2px 0 rgba(68, 9, 71, 0.28);
+                }
+            }
+        }
+      .n-tip-box{
+        button{
+          color: #910095;
+        }
+      }
+    }
+}
 
 /* #### Small wallet #### */
 @media screen and (max-width: 1099px){
@@ -874,4 +1336,3 @@ body {
         font-size: 75%;
     }
 }
-

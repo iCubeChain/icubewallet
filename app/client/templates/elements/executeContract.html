@@ -6,7 +6,7 @@
         <div class="dapp-clear-fix"></div>
 
         <!-- EXECUTE CONTRACT -->
-        <div class="execute-contract">
+        <div class="execute-contract n-execute-contract">
             <!-- <h2> {{i18n "wallet.contracts.contractInformation"}} </h2> -->
 
             <button class="toggle-visibility dapp-block-button dapp-small">
@@ -25,7 +25,7 @@
                     <div class="col col-8 mobile-full contract-info">
                         <h2>{{i18n "wallet.contracts.readFromContract"}}</h2>
             
-                        <table class="contract-constants dapp-zebra">
+                        <table class="contract-constants dapp-zebra n-contract-constants">
                             <tbody>
                             {{#each (TemplateVar.get "contractConstants")}}
                                 {{> elements_executeContract_constant}}
@@ -35,7 +35,7 @@
 
                     </div>
 
-                    <div class="col col-4 mobile-full contract-functions">
+                    <div class="col col-4 mobile-full contract-functions n-contract-functions">
                         {{#with (TemplateVar.get "contractFunctions")}}                    
                             <h2>{{i18n "wallet.contracts.writeToContract"}}</h2>
                             

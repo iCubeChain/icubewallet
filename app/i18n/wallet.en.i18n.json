@@ -38,7 +38,7 @@
                 }
             },
             "error": {
-                "wrongChain": "You seem to be on a different chain.  Please restart the Ethereum Wallet App!"
+                "wrongChain": "You seem to be on a different chain.  Please restart the iCube Wallet App!"
             },
             "warnings": {
                 "txOriginVulnerabilityWallet": "This smart contract wallet has outdated code and is subject to phishing attacks. ",
@@ -73,7 +73,7 @@
             }
         },
         "accounts": {
-            "title": "<strong>Accounts</strong> Overview",
+            "title": "Accounts Overview",
             "walletsTitle": "Wallet contracts",
             "accountsTitle": "Accounts",
             "defaultName": "Unnamed",
@@ -91,7 +91,7 @@
             "owners": "Owners",
             "walletsDescription": "These contracts are stored on the blockchain and can hold and secure Ether. They can have multiple accounts as owners and keep a full log of all transactions.",
             "walletsDescriptionNotEnoughFunds": "Once you have more than 1 Ether you can create more sophisticated contracts. Wallets are smart contracts that allow your funds to be controlled by multiple accounts.  They can have an optional daily limit on withdrawals to increase security.  Create your own custom contracts on the <em>Contracts</em> tab.",
-            "accountsDescription": "Accounts are password protected keys that can hold Ether and Ethereum-based tokens.  They can control contracts, but can't display incoming transactions.",
+            "accountsDescription": "Accounts are password protected keys that can hold Ether and iCube-based tokens.  They can control contracts, but can't display incoming transactions.",
             "buttons": {
                 "deposit": "Transfer Ether & Tokens",
                 "depositBitcoin": "Fund with Bitcoin",
@@ -230,7 +230,7 @@
             }
         },
         "send": {
-            "title": "<strong>Send</strong> funds",
+            "title": "Send funds",
             "sendInfoTitle": "Send",
             "pickAddress": "Pick an address",
             "to": "To",
@@ -261,7 +261,7 @@
             },
             "texts": {
                 "ownerPaysGas": "Gas is paid by the owner of the wallet contract",
-                "sendAmount": "You want to send <strong>__amount__</strong>.",
+                "sendAmount": "You want to send <span>__amount__</span>.",
                 "sendAmountEquivalent": "You want to send <strong>__amount__</strong> in Ether, using exchange rates from <a href=\"https://www.cryptocompare.com/coins/eth/overview/BTC\" target=\"_blank\">cryptocompare.com</a>.<br>Which is currently an equivalent of <strong>__etherAmount__</strong>.",
                 "sendToken": "You want to send <strong>__amount__ __symbol__</strong> of <strong> __name__</strong>.",
                 "overDailyLimit": "<p class=\"over-daily\">This amount is over the remaining daily limit of __limit__ (of __total__ per day), so you need __count__ other account to confirm.</p>",
@@ -287,7 +287,7 @@
             "title": "Custom <strong>Tokens</strong>",
             "subTitle": "Added tokens",
             "admin": "__name__ (admin page)",
-            "description": "Tokens are currencies and other fungibles built on the Ethereum platform. In order for accounts to watch for tokens and send them, you have to add their address to this list. You can create your own token by simply modifying <a href=\"https://ethereum.org/token#the-code\" target=\"_blank\">this example of a custom token contract</a> or learning more about <a href=\"https://www.ethereum.org/token\" target=\"_blank\">Ethereum Tokens</a>.",
+            "description": "Tokens are currencies and other fungibles built on the iCube platform. In order for accounts to watch for tokens and send them, you have to add their address to this list. You can create your own token by simply modifying this example of a custom token contract or learning more about iCube Tokens.",
             "deleteToken": "Do you want to remove the token <strong>__token__</strong> from your list?",
             "addedToken": "Added __token__ to your watch list",
             "editedToken": "Edited token __token__",
@@ -315,7 +315,7 @@
             "writeToContract": "Write to contract",
             "pickContract": "Pick a contract",
             "pickFunction": "Pick a function",
-            "noContract": "<p>Put the source of the contract you want here. You can find many examples of contracts at the <a href=\"http://ethereum.org\" target=\"_blank\">ethereum.org</a>: </p> <ul><li><a href=\"http://ethereum.org/token#the-code\" target=\"_blank\">Build a token</a></li><li><a href=\"http://ethereum.org/crowdsale#the-code\" target=\"_blank\">Start a crowdsale</a></li><li><a href=\"http://ethereum.org/dao#the-code\" target=\"_blank\">Create a blockchain organization</a></li></ul>",
+            "noContract": "<p>Put the source of the contract you want here. ",
             "buttons": {
                 "showContractInfo": "Show contract info",
                 "hideContractInfo": "Hide contract info",

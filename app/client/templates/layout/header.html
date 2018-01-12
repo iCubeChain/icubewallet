@@ -3,17 +3,19 @@
         <ul>
             <li>
                 <a href="{{pathFor route='dashboard'}}" class="{{isActiveRoute regex='dashboard'}}">
-                    <i class="icon-wallet"></i>
-                    <span>{{i18n 'wallet.app.buttons.wallet'}}</span>
+                    {{i18n 'wallet.app.buttons.wallet'}}
                 </a>
             </li>
             <li>
                 <a href="{{goToSend}}" class="{{isActiveRoute regex='send'}}">
-                    <i class="icon-arrow-up"></i>
-                    <span>{{i18n 'wallet.app.buttons.send'}}</span>
+                    {{i18n 'wallet.app.buttons.send'}}
                 </a>
-            </li>            
-            
+            </li>
+            <li>
+                <a href="{{pathFor route='contracts'}}" class="{{isActiveRoute regex='contracts'}}">
+                    {{i18n 'wallet.app.buttons.contracts'}}
+                </a>
+            </li>
             <li class="block-info dapp-flex-item  {{#if TemplateVar.get 'syncing'}}syncing{{/if}}">
                 {{#if isWalletMode}}
 
@@ -35,17 +37,11 @@
                         </span>
                         <progress max="100" value="{{progress}}"></progress>
                     {{else}}
-                        <i class="icon-feed"></i> {{$.Session.get "peerCount"}} <span class="hide-on-small">{{i18n 'wallet.app.texts.peers'}}</span>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="icon-feed"></i> {{$.Session.get "peerCount"}} <span class="hide-on-small mrg-r">{{i18n 'wallet.app.texts.peers'}}</span>
+
                         <i class="icon-layers"></i> {{formattedBlockNumber}} <i class="icon-clock" style="margin-left: 10px;"></i> {{{timeSinceBlock}}} <span class="hide-on-small">{{{timeSinceBlockText}}}</span>
                     {{/with}}
                 {{/if}}
-            </li>
-            <li>
-                <a href="{{pathFor route='contracts'}}" class="{{isActiveRoute regex='contracts'}}">
-                    <i class="icon-docs"></i>
-                    <span>{{i18n 'wallet.app.buttons.contracts'}}</span>
-                </a>
             </li>
             <li class="wallet-balance">
                 <h3>{{i18n 'wallet.app.texts.balance'}}</h3>
