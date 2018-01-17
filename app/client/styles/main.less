@@ -840,12 +840,12 @@ body {
                     border-radius:4px;
                 }
             }
+            .n-dapp-block-button{
+                background: #910095;
+                border-radius: 4px;
+                border:none;
+            }
 
-        }
-        .n-dapp-block-button{
-            background: #910095;
-            border-radius: 4px;
-            border:none;
         }
     }
 }
@@ -1174,31 +1174,76 @@ body{
                 }
             }
         }
+        //新增合约样式
+        .dapp-modal-overlay{
+            .n-addCustom-box,.n-addToken-box{
+                h1,h3{
+                    color: #910095;
+                }
+                input{
+                    background-color: #f1f1f1;
+                    border-radius: 4px;
+                    border: solid 1px #f1f1f1;
+                }
+                textarea{
+                    background-color: #f1f1f1;
+                    box-shadow: 0 4px 9px 0 rgba(241, 241, 241, 0.6);
+                    border-radius: 4px;
+                    border: solid 1px #f1f1f1;
+                }
+            }
+            .dapp-modal-buttons{
+                button{
+                    color: #910095;
+                }
+            }
+        }
         .dapp-flex-content{
             background: transparent;
-            //新增合约样式
-            .dapp-modal-overlay{
-                .addCustom-box{
-                    h1,h3{
-                        color: #910095;
+            input.filter-transactions{
+                background-color: #f3f3f3;
+                border-radius: 2px;
+                border: solid 1px #cccccc;
+            }
+            table.n-transactions{
+                tr{
+                    background: rgba(255,255,255,.6);
+                    .dapp-progress{
+                        background-color: rgba(255, 255, 255, 0.8);
+                        filter: alpha(opacity=10);
+                        -webkit-opacity: 1;
+                        -moz-opacity: 1;
+                        opacity: 1;
                     }
-                    input{
-                        background-color: rgba(255, 255, 255, 0.6);
-                        border-radius: 4px;
-                        border: solid 1px rgba(255, 255, 255, 0.6);
+                    .arrow{
+                        color: #fff;
                     }
-                    textarea{
-                        background-color: rgba(255, 255, 255, 0.6);
-                        box-shadow: 0 4px 9px 0 rgba(241, 241, 241, 0.6);
-                        border-radius: 4px;
-                        border: solid 1px rgba(255, 255, 255, 0.6);
-                    }
-                    .dapp-modal-buttons{
-                        button{
-                            color: #910095;
+                    .n-time-simptip{
+                        h2,p{
+                            color:#4d4d4d;
                         }
                     }
+                    .account-name{
+                        h2{
+                            color: #4d4d4d;
+                        }
+                        .dapp-shorten-text{
+                            a{
+                                color:#890692;
+                            }
+                        }
+                    }
+                    .transaction-amount.minus{
+                        color: #4d4d4d;
+                    }
+                    td .minus{
+                        color: #4d4d4d;
+                    }
+                    .info{
+                        color:#4d4d4d;
+                    }
                 }
+
             }
         }
         .dapp-content{

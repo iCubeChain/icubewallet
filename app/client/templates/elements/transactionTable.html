@@ -3,7 +3,7 @@
     {{#unless $eq collection "PendingConfirmations"}}
         <input type="text" class="filter-transactions" placeholder="{{i18n 'wallet.transactions.filter'}}">
     {{/unless}}
-    <table class="dapp-zebra transactions">
+    <table class="dapp-zebra transactions n-transactions">
         <tbody>
             {{#each items}}
                 {{> elements_transactions_row}}
@@ -36,7 +36,7 @@
                 </div>
             {{/with}}
         {{/unless}}
-        <td class="time simptip-position-right simptip-movable" data-tooltip="{{formatTime timestamp 'LLLL'}}">
+        <td class="time simptip-position-right simptip-movable n-time-simptip" data-tooltip="{{formatTime timestamp 'LLLL'}}">
             <h2>{{formatTime timestamp "MMM"}}</h2>
             <p>{{formatTime timestamp "D"}}</p>
         </td>
