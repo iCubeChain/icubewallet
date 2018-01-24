@@ -53,10 +53,10 @@ web3.eth.getBlock(0, function(e, res){
 web3.eth.getBlock(0, function(e, res){
     if(!e){
 		switch(res.hash) {
-		    case '0x52e85ffdbd19ae62ba09a2f47bd127534ee7434332c41383de7f328e355f01a8':
+		    case '0xd7159434499b34ce4711ac4bb9e271aa828ed554472c22353efbcea5af215aed':
 				Session.set('network', 'main');
 				break;
-		    case '0x35dfff6d9a5a0f2bba459851662250c05b83b50361503d9fbccfb7a734e1f910':
+		    case '0x6185a6af7c9c446ceec279bda53db316f6d7d2fb6f6dfdecbdc253c59a0eb243':
 				Session.set('network', 'testnet');
 				break;
 		    default:
