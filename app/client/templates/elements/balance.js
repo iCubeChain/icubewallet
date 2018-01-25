@@ -67,5 +67,6 @@ Template['elements_balance'].helpers({
                 Meteor.clearInterval(template._intervalId);
             }
         }, 1);
-    }
+    },
+    'unit': 'ICUBE'
 });

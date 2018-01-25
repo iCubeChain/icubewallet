@@ -703,5 +703,6 @@ Template['views_send'].events({
                 sendTransaction(sendAll ? estimatedGas : estimatedGas + 100000);
             }
         }
-    }
+    },
+    'unit':'ICUBE'
 });
