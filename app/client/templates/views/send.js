@@ -314,6 +314,7 @@ Template['views_send'].helpers({
             amount = (selectedAccount && selectedAccount.owners)
                 ? amount
                 : new BigNumber(amount, 10).plus(new BigNumber(gasInWei, 10));
+
         } else {
             amount = new BigNumber(gasInWei, 10);
         }
@@ -703,6 +704,5 @@ Template['views_send'].events({
                 sendTransaction(sendAll ? estimatedGas : estimatedGas + 100000);
             }
         }
-    },
-    'unit':'ICUBE'
+    }
 });
