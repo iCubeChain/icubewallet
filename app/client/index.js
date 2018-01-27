@@ -30,6 +30,7 @@ Meteor.startup(function() {
         }
 
         // If on the mainnet, this will add the unicorn token by default, only once.
+        /*
         if (!localStorage['dapp_hasUnicornToken'] && Session.get('network') === 'main'){
             localStorage.setItem('dapp_hasUnicornToken', true);
 
@@ -46,7 +47,7 @@ Meteor.startup(function() {
                 }});
             }, 5000);
         }
+        */
     });
-
 
 });
