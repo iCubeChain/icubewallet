@@ -264,6 +264,7 @@
                 "dataNotExecutable": "資料似乎不可執行，本筆交易將消耗您提供的全部瓦斯。",
                 "cantEstimateGas": "無法正確估計瓦斯消耗量，您的帳戶需要至少 1 ICUBE 。",
                 "estimatedGas": "估計所需的瓦斯",
+                "notFound":"暂無帳戶",
                 "timeTexts": {
                     "0": "約數分鐘或更久",
                     "1": "約小於數分鐘",

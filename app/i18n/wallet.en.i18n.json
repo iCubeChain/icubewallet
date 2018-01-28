@@ -273,6 +273,7 @@
                 "dataNotExecutable": "It seems this transaction will fail. If you submit it, it may consume all the gas you provide.",
                 "cantEstimateGas": "We can't estimate your gas usage properly, as you need at least 1 ICUBE in your account.",
                 "estimatedGas": "Estimated required gas",
+                "notFound":"Nothing here...",
                 "timeTexts": {
                     "0": "in a few minutes or more",
                     "1": "likely within a few minutes",
