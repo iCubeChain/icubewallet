@@ -79,7 +79,7 @@
             "defaultName": "Unnamed",
             "creating": "Creating",
             "importing": "Importing",
-            "accountNote": "Accounts can't display incoming transactions, but can receive, hold and send ICUBE. To see incoming transactions <a href=\"/account/new\">create a wallet contract</a> to store ICUBE.",
+            "accountNote": "Accounts can't display incoming transactions, but can receive, hold and send ICUBE. ",
             "outOfSyncNote": "If your balance doesn't seem updated, make sure that you are in sync with the network.",
             "walletNote": "Most exchanges don't support receiving ICUBE from a contract wallet yet. Be sure to move your balance to an account address first!",
             "addressCopiedToClipboard": "Copied to clipboard",
