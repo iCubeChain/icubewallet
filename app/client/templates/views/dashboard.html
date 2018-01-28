@@ -1,7 +1,7 @@
 <template name="views_dashboard">
-    {{#if isMist }}
-      {{>mist_alert}}
-    {{/if}}
+    <!--{{#if isMist }}-->
+      <!--{{>mist_alert}}-->
+    <!--{{/if}}-->
 
     <div class="dapp-container">
 
@@ -33,33 +33,32 @@
                 </button>
             {{/if}}
 
-            <hr>
+            <!--<hr>-->
 
-            <h2 class="title-h2">{{i18n "wallet.accounts.walletsTitle"}}</h2>
+            <h2 class="title-h2" style="display: none;">{{i18n "wallet.accounts.walletsTitle"}}</h2>
+            <div style="display: none;">
+                {{#if hasMinimumBalance}}
+                    <p>
+                        {{i18n "wallet.accounts.walletsDescription"}}
+                    </p>
+                {{else}}
+                    <p>
+                        {{{i18n "wallet.accounts.walletsDescriptionNotEnoughFunds"}}}
+                    </p>
+                {{/if}}
 
-            {{#if hasMinimumBalance}}
-                <p>
-                    {{i18n "wallet.accounts.walletsDescription"}}
-                </p>
-            {{else}}
-                <p>
-                    {{{i18n "wallet.accounts.walletsDescriptionNotEnoughFunds"}}}
-                </p>
-            {{/if}}
-
-
-
-            <div class="wallet-box-list n-new-wallet-box">
-            {{#each wallets}}
-                {{> elements_account account=_id wallets=true}}
-            {{/each}}
+                <div class="wallet-box-list n-new-wallet-box">
+                    {{#each wallets}}
+                        {{> elements_account account=_id wallets=true}}
+                    {{/each}}
+                </div>
+                {{#if hasMinimumBalance}}
+                    <a href="{{pathFor route='createAccount'}}" class="wallet-box create n-account-btn">
+                        {{i18n "wallet.app.buttons.addWallet"}}
+                    </a>
+                {{/if}}
             </div>
 
-            {{#if hasMinimumBalance}}
-                <a href="{{pathFor route='createAccount'}}" class="wallet-box create n-account-btn">
-                    {{i18n "wallet.app.buttons.addWallet"}}
-                </a>
-            {{/if}}
 
         {{else}}
             <div class="col col-5 mobile-full ">
@@ -72,7 +71,7 @@
             </div>
             <div class="col col-5 mobile-full ">
                 <h3>{{i18n "wallet.app.texts.noAccounts.title"}}</h3>
-                <p>{{i18n "wallet.app.texts.noAccounts.text"}}</p>
+                <p style="color:#fd3dbc;">{{i18n "wallet.app.texts.noAccounts.text"}}</p>
             </div>
         {{/if}}
 
