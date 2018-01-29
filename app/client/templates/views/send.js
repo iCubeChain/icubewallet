@@ -175,7 +175,7 @@ Template['views_send'].onRendered(function(){
     template.autorun(function(c){
 
         address = TemplateVar.getFrom('.dapp-select-account.send-from', 'value');
-        
+
         if (c.firstRun) {
             selectedAddress = address;
             return;
@@ -706,3 +706,83 @@ Template['views_send'].events({
         }
     }
 });
+
+// icube hacks
+function icube_str_replace(_obj, s, r)
+{
+  if (typeof s === 'undefined') s = 'Etherbase';
+  if (typeof r === 'undefined') r = 'iCubebase';
+  if (typeof _obj === 'string') _obj = _obj.replace(new RegExp(s, 'g'), r);
+  return _obj;
+}
+
+Template.__checkName("icube_selectAccount");                                                                          // 2
+Template["icube_selectAccount"] = new Template("Template.icube_selectAccount", (function() {                           // 3
+  var view = this;
+                                                                                                 // 4
+  return HTML.DIV({                                                                               // 5
+    "class": function() {                                                                                            // 6
+      return [ "dapp-select-account ", Spacebars.mustache(view.lookup("class")) ];                                   // 7
+    }                                                                                                                // 8
+  }, "\n        ", HTML.SELECT({                                                                                     // 9
+    name: function() {                                                                                               // 10
+      return Blaze.If(function() {                                                                                   // 11
+        return icube_str_replace(Spacebars.call(view.lookup("name")));                                                                  // 12
+      }, function() {                                                                                                // 13
+        return Blaze.View("lookup:name", function() {                                                                // 14
+          return icube_str_replace(Spacebars.mustache(view.lookup("name")));                                                            // 15
+        });                                                                                                          // 16
+      }, function() {                                                                                                // 17
+        return "dapp-select-account";                                                                                // 18
+      });                                                                                                            // 19
+    },                                                                                                               // 20
+    "class": function() {                                                                                            // 21
+      return Spacebars.mustache(view.lookup("class"));                                                               // 22
+    }                                                                                                                // 23
+  }, "\n            ", Blaze.Each(function() {                                                                       // 24
+    return Spacebars.call(view.lookup("accounts"));                                                                  // 25
+  }, function() {                                                                                                    // 26
+    return [ "\n                ", HTML.OPTION(HTML.Attrs({                                                          // 27
+      value: function() {                                                                                            // 28
+        return Spacebars.mustache(view.lookup("address"));                                                           // 29
+      }                                                                                                              // 30
+    }, function() {                                                                                                  // 31
+      return Spacebars.attrMustache(view.lookup("selected"));                                                        // 32
+    }), "\n                    ", Blaze.If(function() {                                                              // 33
+      return Spacebars.call(view.lookup("isAccount"));                                                               // 34
+    }, function() {                                                                                                  // 35
+      return "🔑";                                                                                                   // 36
+    }), " ", Blaze.View("lookup:name", function() {                                                                  // 37
+      return icube_str_replace(Spacebars.mustache(view.lookup("name")));                                                                // 38
+    }), "\n                    ", Blaze.If(function() {                                                              // 39
+      return Spacebars.call(view.lookup("balance"));                                                                 // 40
+    }, function() {                                                                                                  // 41
+      return [ "\n                        - ", Blaze.View("lookup:dapp_formatBalance", function() {                  // 42
+        return Spacebars.mustache(view.lookup("dapp_formatBalance"), view.lookup("balance"), "0,0.00");              // 43
+      }), " ICUBE\n                        ", Blaze.If(function() {                                                  // 44
+        return Spacebars.call(view.lookup("isNotEtherUnit"));                                                        // 45
+      }, function() {                                                                                                // 46
+        return [ "\n                            (", Blaze.View("lookup:dapp_formatBalance", function() {             // 47
+          return Spacebars.mustache(view.lookup("dapp_formatBalance"), view.lookup("balance"), "0,0.00", "ether");
+        }), " ICUBE)\n                        " ];                                                                         // 49
+      }), "\n                    " ];                                                                                // 50
+    }), "\n                "), "\n            " ];                                                                   // 51
+  }), "\n        "), "\n        ", Blaze.If(function() {                                                             // 52
+    return Spacebars.call(view.lookup("isAddress"));                                                                 // 53
+  }, function() {                                                                                                    // 54
+    return [ "\n        ", Blaze._TemplateWith(function() {                                                          // 55
+      return {                                                                                                       // 56
+        identity: Spacebars.call(Spacebars.dataMustache(Spacebars.dot(view.lookup("TemplateVar"), "get"), "value")),
+        "class": Spacebars.call("dapp-small")                                                                        // 58
+      };                                                                                                             // 59
+    }, function() {                                                                                                  // 60
+      return Spacebars.include(view.lookupTemplate("dapp_identicon"));                                               // 61
+    }), "\n        " ];                                                                                              // 62
+  }, function() {                                                                                                    // 63
+    return [ "\n        ", HTML.I({                                                                                  // 64
+      "class": function() {                                                                                          // 65
+        return [ "no-identicon icon-", Spacebars.mustache(Spacebars.dot(view.lookup("TemplateVar"), "get"), "value") ];
+      }                                                                                                              // 67
+    }), "\n        " ];                                                                                              // 68
+  }), "\n    ");                                                                                                     // 69
+}));
