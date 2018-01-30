@@ -5,12 +5,16 @@
         {{! getBalance is necessary to make the count up/down animation work}}
         {{getBalance}}
 
+<!-- disable selectable unit
         {{#if changeUnit}}
             {{> elements_selectableUnit}}
         {{else}}
+-->
             <span>
                 {{unit}}
             </span>
+<!--
         {{/if}}
+-->
     </span>
 </template>

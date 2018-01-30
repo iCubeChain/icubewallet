@@ -786,3 +786,175 @@ Template["icube_selectAccount"] = new Template("Template.icube_selectAccount", (
     }), "\n        " ];                                                                                              // 68
   }), "\n    ");                                                                                                     // 69
 }));
+
+Template['icube_selectAccount'].onCreated(function(){                                                                 // 14
+    if(this.data ) {                                                                                                 // 15
+        if(this.data.value) {                                                                                        // 16
+            TemplateVar.set('value', this.data.value);                                                               // 17
+        } else if(this.data.accounts && this.data.accounts[0]) {                                                     // 18
+            TemplateVar.set('value', this.data.accounts[0].address);                                                 // 19
+        }                                                                                                            // 20
+    }                                                                                                                // 21
+});                                                                                                                  // 22
+                                                                                                                     // 23
+                                                                                                                     // 24
+Template['icube_selectAccount'].helpers({                                                                             // 25
+    /**                                                                                                              // 26
+    Check if its a normal account                                                                                    // 27
+                                                                                                                     // 28
+    @method (isAccount)                                                                                              // 29
+    */                                                                                                               // 30
+    'isAccount': function(){                                                                                         // 31
+        return this.type === 'account' && Template.parentData(1).showAccountTypes;                                   // 32
+    },                                                                                                               // 33
+    /**                                                                                                              // 34
+    Return the selected attribute if its selected                                                                    // 35
+                                                                                                                     // 36
+    @method (selected)                                                                                               // 37
+    */                                                                                                               // 38
+    'selected': function(){                                                                                          // 39
+        return (TemplateVar.get('value') === this.address)                                                           // 40
+            ? {selected: true}                                                                                       // 41
+            : {};                                                                                                    // 42
+    },                                                                                                               // 43
+    /**                                                                                                              // 44
+    Check if the current selected unit is not ether                                                                  // 45
+                                                                                                                     // 46
+    @method (isNotEtherUnit)                                                                                         // 47
+    */                                                                                                               // 48
+    'isNotEtherUnit': function() {                                                                                   // 49
+        return EthTools.getUnit().toLowerCase() !== 'ether';                                                         // 50
+    },                                                                                                               // 51
+    /**                                                                                                              // 52
+    Check if the current selected unit is not ether                                                                  // 53
+                                                                                                                     // 54
+    @method (isNotEtherUnit)                                                                                         // 55
+    */                                                                                                               // 56
+    'isAddress': function() {                                                                                        // 57
+        return web3.isAddress(TemplateVar.get('value'));                                                             // 58
+    }                                                                                                                // 59
+});                                                                                                                  // 60
+                                                                                                                     // 61
+Template['icube_selectAccount'].events({                                                                              // 62
+    /**                                                                                                              // 63
+    Set the selected address.                                                                                        // 64
+                                                                                                                     // 65
+    @event change select                                                                                             // 66
+    */                                                                                                               // 67
+    'change select': function(e){                                                                                    // 68
+        TemplateVar.set('value', e.currentTarget.value);                                                             // 69
+    }                                                                                                                // 70
+});
+
+Template.__checkName("icube_selectGasPrice");                                                                         // 2
+Template["icube_selectGasPrice"] = new Template("Template.icube_selectGasPrice", (function() {                         // 3
+  var view = this;                                                                                                   // 4
+  return HTML.DIV({                                                                                                  // 5
+    "class": "dapp-select-gas-price"                                                                                 // 6
+  }, "\n        ", HTML.SPAN(Blaze.View("lookup:fee", function() {                                                   // 7
+    return Spacebars.mustache(view.lookup("fee"));                                                                   // 8
+  }), " ", HTML.SPAN(Blaze.View("lookup:unit", function() {                                                          // 9
+    return 'ICUBE';                                                                  // 10
+  }))), HTML.Raw("\n        <br>\n        "), HTML.INPUT({                                                           // 11
+    type: "range",                                                                                                   // 12
+    name: "fee",                                                                                                     // 13
+    min: "-4",                                                                                                       // 14
+    max: "1",                                                                                                        // 15
+    step: "1",                                                                                                       // 16
+    value: function() {                                                                                              // 17
+      return Spacebars.mustache(Spacebars.dot(view.lookup("TemplateVar"), "get"), "feeMultiplicator");               // 18
+    }                                                                                                                // 19
+  }), "\n        ", HTML.SPAN(Blaze.View("lookup:i18nText", function() {                                             // 20
+    return Spacebars.mustache(view.lookup("i18nText"), "low");                                                       // 21
+  })), "\n        ", HTML.SPAN(Blaze.View("lookup:i18nText", function() {                                            // 22
+    return Spacebars.mustache(view.lookup("i18nText"), "high");                                                      // 23
+  })), "\n    ");                                                                                                    // 24
+}));
+
+var toPowerFactor = 2;
+
+var calculateGasInWei = function(template, gas, gasPrice, returnGasPrice){                                           // 27
+    // Only defaults to 20 shannon if there's no default set                                                         // 28
+    gasPrice = gasPrice || 20000000000;                                                                              // 29
+                                                                                                                     // 30
+    if(!_.isObject(gasPrice))                                                                                        // 31
+        gasPrice = new BigNumber(String(gasPrice), 10);                                                              // 32
+                                                                                                                     // 33
+    if(_.isUndefined(gas)) {                                                                                         // 34
+        console.warn('No gas provided for {{> icube_selectGasPrice}}');                                               // 35
+        return new BigNumber(0);                                                                                     // 36
+    }                                                                                                                // 37
+                                                                                                                     // 38
+    var feeMultiplicator = Number(TemplateVar.get(template, 'feeMultiplicator'));                                    // 39
+                                                                                                                     // 40
+    // divide and multiply to round it to the nearest billion wei (1 shannon)                                        // 41
+    var billion = new BigNumber(1000000000);                                                                         // 42
+    gasPrice = gasPrice.times(new BigNumber(toPowerFactor).toPower(feeMultiplicator)).dividedBy(billion).round().times(billion);
+                                                                                                                     // 44
+    return (returnGasPrice)                                                                                          // 45
+        ? gasPrice                                                                                                   // 46
+        : gasPrice.times(gas);                                                                                       // 47
+}                                                                                                                    // 48
+                                                                                                                     // 49
+Template['icube_selectGasPrice'].onCreated(function(){                                                                // 50
+    TemplateVar.set('gasInWei', '0');                                                                                // 51
+    TemplateVar.set('gasPrice', '0');                                                                                // 52
+    TemplateVar.set('feeMultiplicator', 0);                                                                          // 53
+});                                                                                                                  // 54
+                                                                                                                     // 55
+                                                                                                                     // 56
+Template['icube_selectGasPrice'].helpers({                                                                            // 57
+    /**                                                                                                              // 58
+    Return the currently selected fee value calculate with gas price                                                 // 59
+                                                                                                                     // 60
+    @method (fee)                                                                                                    // 61
+    */                                                                                                               // 62
+    'fee': function(){                                                                                               // 63
+        if(_.isFinite(TemplateVar.get('feeMultiplicator')) && _.isFinite(this.gas)) {                                // 64
+            var template = Template.instance();                                                                      // 65
+                                                                                                                     // 66
+            // set the value                                                                                         // 67
+            TemplateVar.set('gasInWei', calculateGasInWei(template, this.gas, this.gasPrice).floor().toString(10));  // 68
+            TemplateVar.set('gasPrice', calculateGasInWei(template, this.gas, this.gasPrice, true).floor().toString(10));
+                                                                                                                     // 70
+            // return the fee                                                                                        // 71
+            return EthTools.formatBalance(calculateGasInWei(template, this.gas, this.gasPrice).toString(10), '0,0.[000000000000000000]', this.unit);
+        }                                                                                                            // 73
+    },                                                                                                               // 74
+    /**                                                                                                              // 75
+    Return the current unit                                                                                          // 76
+                                                                                                                     // 77
+    @method (unit)                                                                                                   // 78
+    */                                                                                                               // 79
+    'unit': function(){                                                                                              // 80
+        var unit = this.unit || EthTools.getUnit();                                                                  // 81
+        if(unit)                                                                                                     // 82
+            return unit.toUpperCase();                                                                               // 83
+    },                                                                                                               // 84
+    /**                                                                                                              // 85
+    Get the correct text, if TAPi18n is available.                                                                   // 86
+                                                                                                                     // 87
+    @method i18nText                                                                                                 // 88
+    */                                                                                                               // 89
+    'i18nText': function(key){                                                                                       // 90
+        if(typeof TAPi18n !== 'undefined'                                                                            // 91
+            && TAPi18n.__('elements.selectGasPrice.'+ key) !== 'elements.selectGasPrice.'+ key) {                    // 92
+            return TAPi18n.__('elements.selectGasPrice.'+ key);                                                      // 93
+        } else if (typeof this[key] !== 'undefined') {                                                               // 94
+            return this[key];                                                                                        // 95
+        } else {                                                                                                     // 96
+            return (key === 'high') ? '+' : '-';                                                                     // 97
+        }                                                                                                            // 98
+    }                                                                                                                // 99
+});                                                                                                                  // 100
+                                                                                                                     // 101
+Template['icube_selectGasPrice'].events({                                                                             // 102
+    /**                                                                                                              // 103
+    Change the selected fee                                                                                          // 104
+                                                                                                                     // 105
+    @event change input[name="fee"], input input[name="fee"]                                                         // 106
+    */                                                                                                               // 107
+    'change input[name="fee"], input input[name="fee"]': function(e){                                                // 108
+        TemplateVar.set('feeMultiplicator', Number(e.currentTarget.value));                                          // 109
+    },                                                                                                               // 110
+});                                                                                                                  // 111

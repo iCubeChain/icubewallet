@@ -20,10 +20,10 @@
                 {{#if isWalletMode}}
 
                     {{#if $eq ($.Session.get "network") "test"}}
-                        <span class="private-chain" title="{{i18n 'wallet.app.texts.testnetExplain'}}">TEST-NET</span> &nbsp;&nbsp; 
+                        <span class="private-chain" title="{{i18n 'wallet.app.texts.testnetExplain'}}">TEST-NET</span> &nbsp;&nbsp;
                     {{/if}}
                     {{#if $eq ($.Session.get "network") "private"}}
-                        <span class="private-chain" title="{{i18n 'wallet.app.texts.testnetExplain'}}">PRIVATE-NET</span> &nbsp;&nbsp; 
+                        <span class="private-chain" title="ICUBE-NET">ICUBE-NET</span> &nbsp;&nbsp;
                     {{/if}}
 
                     {{#with TemplateVar.get "syncing"}}
@@ -45,7 +45,7 @@
             </li>
             <li class="wallet-balance">
                 <h3>{{i18n 'wallet.app.texts.balance'}}</h3>
-                {{> elements_balance balance=totalBalance changeUnit=true}}
+                {{> elements_balance balance=totalBalance changeUnit=false}}
             </li>
 
             </ul>

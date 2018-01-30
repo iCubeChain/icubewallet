@@ -415,7 +415,7 @@ observeTransactions = function(){
             }
 
             // If on main net, add price data
-            if( Session.get('network') == 'main' && 
+            if( false && Session.get('network') == 'main' &&
                 newDocument.timestamp &&
                (!newDocument.exchangeRates ||
                !newDocument.exchangeRates.btc ||

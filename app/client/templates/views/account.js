@@ -12,7 +12,7 @@ Watches custom events
 var addLogWatching = function(newDocument){
     var contractInstance = web3.eth.contract(newDocument.jsonInterface).at(newDocument.address);
     var blockToCheckBack = (newDocument.checkpointBlock || 0) - ethereumConfig.rollBackBy;
-    
+
     if(blockToCheckBack < 0)
         blockToCheckBack = 0;
 
@@ -25,7 +25,7 @@ var addLogWatching = function(newDocument){
     });
 
     var filter = contractInstance.allEvents({fromBlock: blockToCheckBack, toBlock: 'latest'});
-    
+
     // get past logs, to set the new blockNumber
     var currentBlock = EthBlocks.latest.number;
     filter.get(function(error, logs) {
@@ -69,7 +69,14 @@ var addLogWatching = function(newDocument){
     return filter;
 };
 
-
+// hacks
+function icube_str_replace(_obj, s, r)
+{
+  if (typeof s === 'undefined') s = 'Etherbase';
+  if (typeof r === 'undefined') r = 'iCubebase';
+  if (typeof _obj === 'string') _obj = _obj.replace(new RegExp(s, 'g'), r);
+  return _obj;
+}
 
 Template['views_account'].onRendered(function(){
     console.timeEnd('renderAccountPage');
@@ -83,6 +90,7 @@ Template['views_account'].onDestroyed(function(){
         TemplateVar.set('watchEvents', false);
     }
 });
+
 
 Template['views_account'].helpers({
     /**
@@ -115,7 +123,7 @@ Template['views_account'].helpers({
     @method (availableToday)
     */
     'availableToday': function() {
-        return new BigNumber(this.dailyLimit || '0', 10).minus(new BigNumber(this.dailyLimitSpent || '0', '10')).toString(10);  
+        return new BigNumber(this.dailyLimit || '0', 10).minus(new BigNumber(this.dailyLimitSpent || '0', '10')).toString(10);
     },
     /**
     Show dailyLimit section
@@ -177,12 +185,12 @@ Template['views_account'].helpers({
     },
     /**
      Displays ENS names with triangles
- 
+
      @method (nameDisplay)
      */
     'displayName': function(){
-         return this.ens ? this.name.split('.').slice(0, -1).reverse().join(' ▸ ') : this.name;
-    }           
+         return icube_str_replace((this.ens ? this.name.split('.').slice(0, -1).reverse().join(' ▸ ') : this.name));
+    }
 
 });
 
@@ -197,7 +205,7 @@ var accountClipboardEventHandler = function(e){
 
     function copyAddress(){
         var copyTextarea = document.querySelector('.copyable-address span');
-        var selection = window.getSelection();            
+        var selection = window.getSelection();
         var range = document.createRange();
         range.selectNodeContents(copyTextarea);
         selection.removeAllRanges();
@@ -205,7 +213,7 @@ var accountClipboardEventHandler = function(e){
 
         try {
             document.execCommand('copy');
-            
+
             GlobalNotification.info({
                content: 'i18n:wallet.accounts.addressCopiedToClipboard',
                duration: 3
@@ -248,7 +256,7 @@ Template['views_account'].events({
         var data = this;
 
         EthElements.Modal.question({
-            text: new Spacebars.SafeString(TAPi18n.__('wallet.accounts.modal.deleteText') + 
+            text: new Spacebars.SafeString(TAPi18n.__('wallet.accounts.modal.deleteText') +
                 '<br><input type="text" class="deletionConfirmation" autofocus="true">'),
             ok: function(){
                 if($('input.deletionConfirmation').val() === 'delete') {
@@ -312,21 +320,21 @@ Template['views_account'].events({
     },
     /**
     Click to copy the code to the clipboard
-    
+
     @event click a.create.account
     */
     'click .copy-to-clipboard-button': accountClipboardEventHandler,
 
     /**
     Tries to copy account token.
-    
+
     @event copy .copyable-address span
     */
     'copy .copyable-address': accountClipboardEventHandler,
 
     /**
     Click to launch Coinbase widget
-    
+
     @event click deposit-using-coinbase
     */
     'click .deposit-using-coinbase': function(e){
@@ -343,12 +351,12 @@ Template['views_account'].events({
 
     /**
     Click to reveal QR Code
-    
+
     @event click a.create.account
     */
     'click .qrcode-button': function(e){
         e.preventDefault();
-        
+
         // Open a modal showing the QR Code
         EthElements.Modal.show({
             template: 'views_modals_qrCode',
@@ -357,17 +365,17 @@ Template['views_account'].events({
             }
         });
 
-        
+
     },
     /**
     Click to reveal the jsonInterface
-    
+
     @event click .interface-button
     */
     'click .interface-button': function(e){
         e.preventDefault();
         var jsonInterface = (this.owners) ? _.clone(walletInterface) : _.clone(this.jsonInterface);
-        
+
         //clean ABI from circular references
         var cleanJsonInterface = _.map(jsonInterface, function(e, i) {
             return _.omit(e, 'contractInstance');
@@ -379,11 +387,11 @@ Template['views_account'].events({
             data: {
                 jsonInterface: cleanJsonInterface
             }
-        });   
+        });
     },
     /**
     Click watch contract events
-    
+
     @event change button.toggle-watch-events
     */
     'change .toggle-watch-events': function(e, template){
