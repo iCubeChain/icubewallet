@@ -51,6 +51,22 @@ Template['views_modals_transactionInfo'].helpers({
     */
     'gasPricePerMillion': function() {
         return this.gasPrice * 1000000;
+    },
+    /**
+     Clear amount from characters
+
+     @method (clearAmountFromChars)
+     */
+    'clearUnitChars': function(amount){
+        // window.alert(amount)
+        amount = (~amount.indexOf('.'))
+            ? amount.replace(/\,/g,'')
+            : amount;
+
+        return amount.replace(/ETHER/g,'');
+
+    },
+    'clearDefaultMain':function(account){
+        window.alert(account);
     }
 });
-
