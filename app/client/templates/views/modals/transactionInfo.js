@@ -65,8 +65,5 @@ Template['views_modals_transactionInfo'].helpers({
 
         return amount.replace(/ETHER/g,'');
 
-    },
-    'clearDefaultMain':function(account){
-        window.alert(account);
     }
 });
