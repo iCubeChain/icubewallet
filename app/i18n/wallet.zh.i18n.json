@@ -84,7 +84,7 @@
             "walletNote": "大多数交易尚未支持从从合约钱包接受ICUBE。请务必先把钱转移到一个账户地址！",
             "addressCopiedToClipboard": "已复制到剪贴板",
             "addressNotCopiedToClipboard": "复制到剪贴板出错。请再试一遍。",
-            "qrCodeLabel": "请相互兼容的手机应用指向这个二维码",
+            "qrCodeLabel": "请用手机应用扫描二维码",
             "dailyLimit": "每日限额",
             "dailyLimitRemaining": "每日剩余限额",
             "requiredSignatures": "需要盖章",
