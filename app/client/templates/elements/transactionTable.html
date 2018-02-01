@@ -85,7 +85,7 @@
                     {{#if tokenId}}
                         {{tokenValue}}
                     {{else}}
-                        {{formatTransactionBalance value exchangeRates}}
+                        {{clearUnitChars (formatTransactionBalance value exchangeRates)}} ICUBE
                     {{/if}}
                 </td>
                 <td>
@@ -96,7 +96,7 @@
                     {{#if tokenId}}
                         -{{tokenValue}}
                     {{else}}
-                        -{{formatTransactionBalance value exchangeRates}}
+                        -{{clearUnitChars (formatTransactionBalance value exchangeRates)}} ICUBE
                     {{/if}}
                 </td>
                 <td>
@@ -109,7 +109,7 @@
                 <td colspan='2' class="button">
                     {{> spinner}}
                 </td>
-            {{else}}           
+            {{else}}
                 {{#if multipleOwnersApproved}}
                     {{#if approved}}
                     <td class="button">

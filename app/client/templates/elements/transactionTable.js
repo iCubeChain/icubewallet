@@ -274,6 +274,20 @@ Template['elements_transactions_row'].helpers({
         var token = Tokens.findOne(this.tokenId);
 
         return (token) ? Helpers.formatNumberByDecimals(this.value, token.decimals) +' '+ token.symbol : this.value;
+    },
+    /**
+     Clear amount from characters
+
+     @method (clearAmountFromChars)
+     */
+    'clearUnitChars': function(amount){
+        // window.alert(amount)
+        amount = (~amount.indexOf('.'))
+            ? amount.replace(/\,/g,'')
+            : amount;
+
+        return amount.replace(/ETHER/g,'');
+
     }
 });
 
