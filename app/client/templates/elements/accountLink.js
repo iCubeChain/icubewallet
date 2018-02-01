@@ -5,6 +5,14 @@ The account link template
 @constructor
 */
 
+// icube hacks
+function icube_str_replace(_obj, s, r)
+{
+  if (typeof s === 'undefined') s = 'Etherbase';
+  if (typeof r === 'undefined') r = 'iCubebase';
+  if (typeof _obj === 'string') _obj = _obj.replace(new RegExp(s, 'g'), r);
+  return _obj;
+}
 
 Template['elements_account_link'].helpers({
     /**
@@ -29,7 +37,7 @@ Template['elements_account_link'].helpers({
     @method (nameDisplay)
     */
     'displayName': function(){
-        return this.ens ? this.name.split('.').slice(0, -1).reverse().join(' ▸ ') : this.name;
+        return icube_str_replace((this.ens ? this.name.split('.').slice(0, -1).reverse().join(' ▸ ') : this.name));
     },
     /**
     Displays ENS names with triangles
