@@ -722,7 +722,7 @@ Template["icube_selectAccount"] = new Template("Template.icube_selectAccount", (
                                                                                                  // 4
   return HTML.DIV({                                                                               // 5
     "class": function() {                                                                                            // 6
-      return [ "dapp-select-account ", Spacebars.mustache(view.lookup("class")) ];                                   // 7
+      return [ "dapp-select-account ", Spacebars.mustache(view.lookup("class")), " n-new-thumb" ];                                   // 7
     }                                                                                                                // 8
   }, "\n        ", HTML.SELECT({                                                                                     // 9
     name: function() {                                                                                               // 10
@@ -776,7 +776,7 @@ Template["icube_selectAccount"] = new Template("Template.icube_selectAccount", (
         "class": Spacebars.call("dapp-small")                                                                        // 58
       };                                                                                                             // 59
     }, function() {                                                                                                  // 60
-      return Spacebars.include(view.lookupTemplate("dapp_identicon"));                                               // 61
+      return Spacebars.include(view.lookupTemplate("dapp_identicon_icube"));                                               // 61
     }), "\n        " ];                                                                                              // 62
   }, function() {                                                                                                    // 63
     return [ "\n        ", HTML.I({                                                                                  // 64
@@ -957,4 +957,252 @@ Template['icube_selectGasPrice'].events({                                       
     'change input[name="fee"], input input[name="fee"]': function(e){                                                // 108
         TemplateVar.set('feeMultiplicator', Number(e.currentTarget.value));                                          // 109
     },                                                                                                               // 110
-});                                                                                                                  // 111
+});
+
+Template.__checkName("dapp_addressInput_icube");                                                                           // 2
+Template["dapp_addressInput_icube"] = new Template("Template.dapp_addressInput_icube", (function() {                             // 3
+    var view = this;                                                                                                   // 4
+    return HTML.DIV({                                                                                                  // 5
+        class: "dapp-address-input n-new-thumb"                                                                                      // 6
+    }, "\n        ", HTML.INPUT(HTML.Attrs({                                                                           // 7
+        type: "text",                                                                                                    // 8
+        name: function() {                                                                                               // 9
+            return Spacebars.mustache(view.lookup("name"));                                                                // 10
+        },                                                                                                               // 11
+        placeholder: function() {                                                                                        // 12
+            return Spacebars.mustache(view.lookup("placeholder"));                                                         // 13
+        },                                                                                                               // 14
+        class: function() {                                                                                              // 15
+            return [ Spacebars.mustache(view.lookup("class")), " ", Blaze.Unless(function() {                              // 16
+                return Spacebars.dataMustache(Spacebars.dot(view.lookup("TemplateVar"), "get"), "isValid");                  // 17
+            }, function() {                                                                                                // 18
+                return "dapp-error";                                                                                         // 19
+            }), " ", Blaze.Unless(function() {                                                                             // 20
+                return Spacebars.dataMustache(Spacebars.dot(view.lookup("TemplateVar"), "get"), "isChecksum");               // 21
+            }, function() {                                                                                                // 22
+                return " dapp-non-checksum ";                                                                                // 23
+            }) ];                                                                                                          // 24
+        },                                                                                                               // 25
+        value: function() {                                                                                              // 26
+            return Spacebars.mustache(view.lookup("value"));                                                               // 27
+        },                                                                                                               // 28
+        title: function() {                                                                                              // 29
+            return Blaze.Unless(function() {                                                                               // 30
+                return Spacebars.dataMustache(Spacebars.dot(view.lookup("TemplateVar"), "get"), "isChecksum");               // 31
+            }, function() {                                                                                                // 32
+                return Blaze.View("lookup:i18nText", function() {                                                            // 33
+                    return Spacebars.mustache(view.lookup("i18nText"));                                                        // 34
+                });                                                                                                          // 35
+            });                                                                                                            // 36
+        }                                                                                                                // 37
+    }, function() {                                                                                                    // 38
+        return Spacebars.attrMustache(view.lookup("additionalAttributes"));                                              // 39
+    })), "\n        ", Blaze.If(function() {                                                                           // 40
+        return Spacebars.dataMustache(Spacebars.dot(view.lookup("TemplateVar"), "get"), "isValid");                      // 41
+    }, function() {                                                                                                    // 42
+        return [ "\n            ", Blaze._TemplateWith(function() {                                                      // 43
+            return {                                                                                                       // 44
+                identity: Spacebars.call(view.lookup("address")),                                                            // 45
+                class: Spacebars.call("dapp-small")                                                                          // 46
+            };                                                                                                             // 47
+        }, function() {                                                                                                  // 48
+            return Spacebars.include(view.lookupTemplate("dapp_identicon_icube"));                                               // 49
+        }), "\n        " ];                                                                                              // 50
+    }, function() {                                                                                                    // 51
+        return [ "\n            ", HTML.I({                                                                              // 52
+            class: "icon-shield"                                                                                           // 53
+        }), "\n        " ];                                                                                              // 54
+    }), "\n    ");                                                                                                     // 55
+}));
+
+Template['dapp_addressInput_icube'].onCreated(function(){                                                                  // 14
+    // 15
+    // default set to true, to show no error                                                                         // 16
+    TemplateVar.set('isValid', true);                                                                                // 17
+    TemplateVar.set('isChecksum', true);                                                                             // 18
+                                                                                                                     // 19
+    if(this.data && this.data.value) {                                                                               // 20
+        TemplateVar.set('value', this.data.value);                                                                   // 21
+        console.log('value: ', this.data.value);                                                                     // 22
+    }                                                                                                                // 23
+});                                                                                                                  // 24
+                                                                                                                     // 25
+Template['dapp_addressInput_icube'].onRendered(function(){                                                                 // 26
+    if(this.data && this.data.value) {                                                                               // 27
+        this.$('input').trigger('change');                                                                           // 28
+    }                                                                                                                // 29
+});                                                                                                                  // 30
+                                                                                                                     // 31
+Template['dapp_addressInput_icube'].helpers({                                                                              // 32
+    /**                                                                                                              // 33
+     Return the to address                                                                                            // 34
+     // 35
+     @method (address)                                                                                                // 36
+     */                                                                                                               // 37
+    'address': function(){                                                                                           // 38
+        var address = TemplateVar.get('value');                                                                      // 39
+                                                                                                                     // 40
+        if(Template.instance().view.isRendered && Template.instance().find('input').value !== address)               // 41
+            Template.instance().$('input').trigger('change');                                                        // 42
+                                                                                                                     // 43
+        return (_.isString(address)) ? '0x'+ address.replace('0x','') : false;                                       // 44
+    },                                                                                                               // 45
+    /**                                                                                                              // 46
+     Return the autofocus or disabled attribute.                                                                      // 47
+     // 48
+     @method (additionalAttributes)                                                                                   // 49
+     */                                                                                                               // 50
+    'additionalAttributes': function(){                                                                              // 51
+        var attr = {};                                                                                               // 52
+                                                                                                                     // 53
+        if(this.autofocus)                                                                                           // 54
+            attr.autofocus = true;                                                                                   // 55
+        if(this.disabled)                                                                                            // 56
+            attr.disabled = true;                                                                                    // 57
+                                                                                                                     // 58
+        return attr;                                                                                                 // 59
+    },                                                                                                               // 60
+    /**                                                                                                              // 61
+     Get the correct text, if TAPi18n is available.                                                                   // 62
+     // 63
+     @method i18nText                                                                                                 // 64
+     */                                                                                                               // 65
+    'i18nText': function(){                                                                                          // 66
+        if(typeof TAPi18n === 'undefined' || TAPi18n.__('elements.checksumAlert') == 'elements.checksumAlert') {     // 67
+            return "This address looks valid, but it doesn't have some security features that will protect you against typos, so double check you have the right one. If provided, check if the security icon  matches.";
+        } else {                                                                                                     // 69
+            return TAPi18n.__('elements.checksumAlert');                                                             // 70
+        }                                                                                                            // 71
+    }                                                                                                                // 72
+});                                                                                                                  // 73
+                                                                                                                     // 74
+                                                                                                                     // 75
+Template['dapp_addressInput_icube'].events({                                                                               // 76
+    /**                                                                                                              // 77
+     Set the address while typing                                                                                     // 78
+     // 79
+     @event input input, change input                                                                                 // 80
+     */                                                                                                               // 81
+    'input input, change input': function(e, template){                                                              // 82
+        var value = e.currentTarget.value.replace(/\s+/g, '');                                                       // 83
+                                                                                                                     // 84
+        // add 0x                                                                                                    // 85
+        if(value.length > 2 && value.indexOf('0x') === -1) {                                                         // 86
+            value = '0x'+ value;                                                                                     // 87
+            e.currentTarget.value = value;                                                                           // 88
+        }                                                                                                            // 89
+                                                                                                                     // 90
+        if(web3.isAddress(value) || _.isEmpty(value)) {                                                              // 91
+            TemplateVar.set('isValid', true);                                                                        // 92
+                                                                                                                     // 93
+            if(!_.isEmpty(value)) {                                                                                  // 94
+                TemplateVar.set('value', '0x'+ value.replace('0x',''));                                              // 95
+                TemplateVar.set('isChecksum', web3.isChecksumAddress(value));                                        // 96
+            } else {                                                                                                 // 97
+                TemplateVar.set('value', undefined);                                                                 // 98
+                TemplateVar.set('isChecksum', true);                                                                 // 99
+            }                                                                                                        // 100
+                                                                                                                     // 101
+        } else {                                                                                                     // 102
+            TemplateVar.set('isValid', false);                                                                       // 103
+            TemplateVar.set('value', undefined);                                                                     // 104
+        }                                                                                                            // 105
+                                                                                                                     // 106
+    },                                                                                                               // 107
+    /**                                                                                                              // 108
+     Prevent the identicon from beeing clicked.                                                                       // 109
+     // 110
+     TODO: remove?                                                                                                    // 111
+     // 112
+     @event click a                                                                                                   // 113
+     */                                                                                                               // 114
+    'click a': function(e){                                                                                          // 115
+        e.preventDefault();                                                                                          // 116
+    }                                                                                                                // 117
+});
+
+Template.__checkName("dapp_identicon_icube");
+Template["dapp_identicon_icube"] = new Template("Template.dapp_identicon_icube", (function() {
+    var view = this;
+    return Blaze.If(function() {
+        return Spacebars.call(view.lookup("identity"));
+    }, function() {
+        return [ "\n        ", Blaze.If(function() {
+            return Spacebars.call(view.lookup("link"));
+        }, function() {
+            return [ "\n            ", HTML.A({
+                href: function() {
+                    return Spacebars.mustache(view.lookup("link"));
+                },
+                class: function() {
+                    return [ "dapp-identicon ", Spacebars.mustache(view.lookup("class")) ];
+                },
+                style: function() {
+                    return [ "background-image: url('", Spacebars.mustache(view.lookup("identiconData"), view.lookup("identity")), "')" ];
+                },
+                title: function() {
+                    return Spacebars.mustache(view.lookup("i18nTextIcon"));
+                }
+            }), "\n        " ];
+        }, function() {
+            var imgPath = window.parseInt(Spacebars.call(view.lookup("identity")),16)%30;
+            // window.alert(imgPath);
+            return [ "\n            ", HTML.SPAN({
+                class: function() {
+                    return [ "dapp-identicon ", Spacebars.mustache(view.lookup("class")), " img",imgPath,""];
+                },
+                style: function() {
+                    // return [ "background-image: url('../../images/", imgPath, ".png')" ];
+                    // return [ "background-image: url('", Spacebars.mustache(view.lookup("identiconData"), view.lookup("identity")), "')" ];
+                },
+                title: function() {
+                    return Spacebars.mustache(view.lookup("i18nTextIcon"));
+                }
+            }), "\n        " ];
+        }), "\n    " ];
+    });
+}));
+
+/**
+ The cached identicons
+ @property cache
+ */
+var cache = {};
+
+Template['dapp_identicon_icube'].helpers({
+    /**
+     Make sure the identity is lowercased
+     @method (identity)
+     */
+    'identity': function(identity){
+        return (_.isString(this.identity)) ? this.identity.toLowerCase() : this.identity;
+    },
+    /**
+     Return the cached or generated identicon
+     @method (identiconData)
+     */
+    'identiconData': function(identity){
+        // remove items if the cache is larger than 50 entries
+        if(_.size(cache) > 50) {
+            delete cache[Object.keys(cache)[0]];
+        }
+
+        return cache['ID_'+ identity] || (cache['ID_'+ identity] =  blockies.create({
+            seed: identity,
+            size: 8,
+            scale: 8
+        }).toDataURL());
+    },
+    /**
+     Get the correct text, if TAPi18n is available.
+     @method i18nText
+     */
+    'i18nTextIcon': function(){
+        if(typeof TAPi18n === 'undefined' || TAPi18n.__('elements.identiconHelper') == 'elements.identiconHelper') {
+            return "This is a security icon, if there's any change on the address the resulting icon should be a completelly different one";
+        } else {
+            return TAPi18n.__('elements.identiconHelper');
+        }
+    }
+});
+
