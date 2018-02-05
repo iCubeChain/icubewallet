@@ -61,8 +61,8 @@ Template['elements_account_link'].helpers({
 
     }
 });
-Template.__checkName("dapp_identicon_icube");
-Template["dapp_identicon_icube"] = new Template("Template.dapp_identicon_icube", (function() {
+Template.__checkName("dapp_identicon_icube_link");
+Template["dapp_identicon_icube_link"] = new Template("Template.dapp_identicon_icube_link", (function() {
     var view = this;
     return Blaze.If(function() {
         return Spacebars.call(view.lookup("identity"));
@@ -109,7 +109,7 @@ Template["dapp_identicon_icube"] = new Template("Template.dapp_identicon_icube",
  */
 var cache = {};
 
-Template['dapp_identicon_icube'].helpers({
+Template['dapp_identicon_icube_link'].helpers({
     /**
      Make sure the identity is lowercased
      @method (identity)

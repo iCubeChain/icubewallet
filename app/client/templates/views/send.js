@@ -776,7 +776,7 @@ Template["icube_selectAccount"] = new Template("Template.icube_selectAccount", (
         "class": Spacebars.call("dapp-small")                                                                        // 58
       };                                                                                                             // 59
     }, function() {                                                                                                  // 60
-      return Spacebars.include(view.lookupTemplate("dapp_identicon_icube"));                                               // 61
+      return Spacebars.include(view.lookupTemplate("dapp_identicon_icube_send"));                                               // 61
     }), "\n        " ];                                                                                              // 62
   }, function() {                                                                                                    // 63
     return [ "\n        ", HTML.I({                                                                                  // 64
@@ -1006,7 +1006,7 @@ Template["dapp_addressInput_icube"] = new Template("Template.dapp_addressInput_i
                 class: Spacebars.call("dapp-small")                                                                          // 46
             };                                                                                                             // 47
         }, function() {                                                                                                  // 48
-            return Spacebars.include(view.lookupTemplate("dapp_identicon_icube"));                                               // 49
+            return Spacebars.include(view.lookupTemplate("dapp_identicon_icube_send"));                                               // 49
         }), "\n        " ];                                                                                              // 50
     }, function() {                                                                                                    // 51
         return [ "\n            ", HTML.I({                                                                              // 52
@@ -1121,8 +1121,8 @@ Template['dapp_addressInput_icube'].events({                                    
     }                                                                                                                // 117
 });
 
-Template.__checkName("dapp_identicon_icube");
-Template["dapp_identicon_icube"] = new Template("Template.dapp_identicon_icube", (function() {
+Template.__checkName("dapp_identicon_icube_send");
+Template["dapp_identicon_icube_send"] = new Template("Template.dapp_identicon_icube_send", (function() {
     var view = this;
     return Blaze.If(function() {
         return Spacebars.call(view.lookup("identity"));
@@ -1169,7 +1169,7 @@ Template["dapp_identicon_icube"] = new Template("Template.dapp_identicon_icube",
  */
 var cache = {};
 
-Template['dapp_identicon_icube'].helpers({
+Template['dapp_identicon_icube_send'].helpers({
     /**
      Make sure the identity is lowercased
      @method (identity)

@@ -1,7 +1,7 @@
 <template name="elements_account_link">
     {{#with getAccount}}
         <span class="address dapp-shorten-text {{ensClass}} n-new-thumb">
-            {{> dapp_identicon_icube identity=address class="dapp-tiny"}}
+            {{> dapp_identicon_icube_link identity=address class="dapp-tiny"}}
             {{#if name}}
                 <a href="{{pathFor route='account' address=address}}">{{displayName}}</a>
             {{else}}
